@@ -33,17 +33,19 @@ namespace Example
 		private void LoadShader()
 		{
 			string sVertexShader = @"
-				#version 130				
-				varying vec2 uv;
+				#version 430 core				
 				void main() {
-					gl_Position = gl_Vertex;
-					uv = gl_Vertex.xy * 0.5f + 0.5f;
+					const vec3 vertices[4] = vec3[4](vec3(-0.9, -0.8, 0.5),
+                                    vec3( 0.9, -0.9, 0.5),
+                                    vec3( 0.9,  0.8, 0.5),
+                                    vec3(-0.9,  0.9, 0.5));
+					gl_Position = vec4(vertices[gl_VertexID], 1.0);
 				}";
 			string sFragmentShd = @"
-			varying vec2 uv;
+			#version 430 core
+			out vec4 color;
 			void main() {
-				vec3 color = vec3(uv, 1.0);
-				gl_FragColor = vec4(color, 1.0);
+				color = vec4(0.2, 0.3, 1.0, 1.0);
 			}";
 			//read shader from file
 			//string fileName = @"..\..\..\GLSL pixel shader\Hello world.glsl";
@@ -63,13 +65,7 @@ namespace Example
 		{
 			GL.Clear(ClearBufferMask.ColorBufferBit);
 			shader.Begin();
-			GL.Begin(PrimitiveType.Quads);
-			GL.Color3(Color.White);
-			GL.Vertex2(-1.0, -1.0);
-			GL.Vertex2(1.0, -1.0);
-			GL.Vertex2(1.0, 1.0);
-			GL.Vertex2(-1.0, 1.0);
-			GL.End();
+			GL.DrawArrays(PrimitiveType.Quads, 0, 4);
 			shader.End();
 			gameWindow.SwapBuffers();
 		}
