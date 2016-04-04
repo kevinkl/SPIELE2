@@ -24,6 +24,7 @@ namespace Example
 		};
 
 		private GameWindow gameWindow = new GameWindow();
+		private const int particelCount = 400;
 		private Shader shader;
 
 		[STAThread]
@@ -47,12 +48,13 @@ namespace Example
 
 		private void InitVBOs()
 		{
+			var rnd = new Random(12);
+			Func<float> RndNmbr = () => (float)(rnd.NextDouble() * 2.0 - 1.0);
 			var vertices = new List<VertexFormat>();
-			vertices.Add(new VertexFormat(new Vector3(0.0f, 0.0f, 0.0f)));
-			vertices.Add(new VertexFormat(new Vector3(1.0f, 0.0f, 0.0f)));
-			vertices.Add(new VertexFormat(new Vector3(0.9f, 1.0f, 0.0f)));
-			vertices.Add(new VertexFormat(new Vector3(0.0f, 1.0f, 0.0f)));
-
+			for (uint i = 0; i < particelCount; ++i)
+			{
+				vertices.Add(new VertexFormat(new Vector3(RndNmbr(), RndNmbr(), RndNmbr())));
+			}
 			uint vbo; //our vbo handler
 			GL.GenBuffers(1, out vbo);
 			GL.BindBuffer(BufferTarget.ArrayBuffer, vbo);//bind to context
@@ -90,11 +92,13 @@ namespace Example
 		private void game_RenderFrame(object sender, FrameEventArgs e)
 		{
 			GL.Clear(ClearBufferMask.ColorBufferBit);
+			GL.PointSize(5.0f);
 			shader.Begin();
 			GL.EnableVertexAttribArray(0);
 			GL.VertexAttribPointer(0, 3, VertexAttribPointerType.Float, false, VertexFormat.size, 0);
-			GL.DrawArrays(PrimitiveType.Quads, 0, 4);
+			GL.DrawArrays(PrimitiveType.Points, 0, particelCount);
 			shader.End();
+			GL.DisableVertexAttribArray(0);
 			gameWindow.SwapBuffers();
 		}
 	}
