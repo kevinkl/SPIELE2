@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{D2E19210-80D1-4F07-8E9D-5205F18B0B26}</ProjectGuid>
+    <ProjectGuid>{C9043719-1776-48D3-9515-5370F1508C48}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>MinimalShaderOpenGL</RootNamespace>
-    <AssemblyName>MinimalShaderOpenGL</AssemblyName>
+    <RootNamespace>Example</RootNamespace>
+    <AssemblyName>ShaderVBOExample</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <PublishUrl>publish\</PublishUrl>
@@ -97,8 +97,9 @@
     <Compile Include="Program.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Reference Include="OpenTK">
-      <HintPath>..\Externals\OpenTK\OpenTK.dll</HintPath>
+    <Reference Include="OpenTK, Version=1.1.0.0, Culture=neutral, PublicKeyToken=bad199fe84eb3df4, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Externals\OpenTK\OpenTK.dll</HintPath>
     </Reference>
     <Reference Include="System.Drawing" />
   </ItemGroup>
@@ -123,7 +124,7 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Framework\Framework.csproj">
+    <ProjectReference Include="..\..\Framework\Framework.csproj">
       <Project>{c660f6af-c100-4169-a9fb-61e1ebe87f34}</Project>
       <Name>Framework</Name>
     </ProjectReference>

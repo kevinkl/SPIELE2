@@ -2,12 +2,27 @@
 using OpenTK;
 using OpenTK.Graphics.OpenGL;
 using System;
+using System.Collections.Generic;
 using System.Drawing;
+using System.Runtime.InteropServices;
 
 namespace Example
 {
 	class MyApplication
 	{
+		struct VertexFormat
+		{
+			Vector3 position;
+
+			public VertexFormat(Vector3 pos)
+			{
+				position = pos;
+			}
+
+			//public static readonly uint size = sizeof(float) * 3;
+			public static readonly int size = Marshal.SizeOf(typeof(VertexFormat));
+		};
+
 		private GameWindow gameWindow = new GameWindow();
 		private Shader shader;
 
@@ -27,19 +42,30 @@ namespace Example
 		{
 			gameWindow.RenderFrame += game_RenderFrame;
 			LoadShader();
+			InitVBOs();
+		}
 
+		private void InitVBOs()
+		{
+			var vertices = new List<VertexFormat>();
+			vertices.Add(new VertexFormat(new Vector3(0.0f, 0.0f, 0.0f)));
+			vertices.Add(new VertexFormat(new Vector3(1.0f, 0.0f, 0.0f)));
+			vertices.Add(new VertexFormat(new Vector3(0.9f, 1.0f, 0.0f)));
+			vertices.Add(new VertexFormat(new Vector3(0.0f, 1.0f, 0.0f)));
+
+			uint vbo; //our vbo handler
+			GL.GenBuffers(1, out vbo);
+			GL.BindBuffer(BufferTarget.ArrayBuffer, vbo);//bind to context
+			GL.BufferData(BufferTarget.ArrayBuffer, (IntPtr)(VertexFormat.size * vertices.Count), vertices.ToArray(), BufferUsageHint.StaticDraw);
 		}
 
 		private void LoadShader()
 		{
 			string sVertexShader = @"
 				#version 430 core				
+				layout(location = 0) in vec3 in_position;  //set the frist input on location (index) 0 ; in_position is our attribute 
 				void main() {
-					const vec3 vertices[4] = vec3[4](vec3(-0.9, -0.8, 0.5),
-                                    vec3( 0.9, -0.9, 0.5),
-                                    vec3( 0.9,  0.8, 0.5),
-                                    vec3(-0.9,  0.9, 0.5));
-					gl_Position = vec4(vertices[gl_VertexID], 1.0);
+					gl_Position = vec4(in_position, 1.0);//w is 1.0, also notice cast to a vec4
 				}";
 			string sFragmentShd = @"
 			#version 430 core
@@ -65,6 +91,8 @@ namespace Example
 		{
 			GL.Clear(ClearBufferMask.ColorBufferBit);
 			shader.Begin();
+			GL.EnableVertexAttribArray(0);
+			GL.VertexAttribPointer(0, 3, VertexAttribPointerType.Float, false, VertexFormat.size, 0);
 			GL.DrawArrays(PrimitiveType.Quads, 0, 4);
 			shader.End();
 			gameWindow.SwapBuffers();

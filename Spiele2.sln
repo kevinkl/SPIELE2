@@ -3,9 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
 VisualStudioVersion = 14.0.24720.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MinimalShaderOpenGL", "MinimalShaderExample\MinimalShaderOpenGL.csproj", "{D2E19210-80D1-4F07-8E9D-5205F18B0B26}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Framework", "Framework\Framework.csproj", "{C660F6AF-C100-4169-A9FB-61E1EBE87F34}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ShaderVBOExample", "Examples\ShaderVBOExample\ShaderVBOExample.csproj", "{C9043719-1776-48D3-9515-5370F1508C48}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MinimalShaderOpenGL", "Examples\MinimalShaderExample\MinimalShaderOpenGL.csproj", "{D2E19210-80D1-4F07-8E9D-5205F18B0B26}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -13,14 +15,18 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{D2E19210-80D1-4F07-8E9D-5205F18B0B26}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{D2E19210-80D1-4F07-8E9D-5205F18B0B26}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{D2E19210-80D1-4F07-8E9D-5205F18B0B26}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{D2E19210-80D1-4F07-8E9D-5205F18B0B26}.Release|Any CPU.Build.0 = Release|Any CPU
 		{C660F6AF-C100-4169-A9FB-61E1EBE87F34}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{C660F6AF-C100-4169-A9FB-61E1EBE87F34}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C660F6AF-C100-4169-A9FB-61E1EBE87F34}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C660F6AF-C100-4169-A9FB-61E1EBE87F34}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C9043719-1776-48D3-9515-5370F1508C48}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C9043719-1776-48D3-9515-5370F1508C48}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C9043719-1776-48D3-9515-5370F1508C48}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C9043719-1776-48D3-9515-5370F1508C48}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D2E19210-80D1-4F07-8E9D-5205F18B0B26}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D2E19210-80D1-4F07-8E9D-5205F18B0B26}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D2E19210-80D1-4F07-8E9D-5205F18B0B26}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D2E19210-80D1-4F07-8E9D-5205F18B0B26}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
