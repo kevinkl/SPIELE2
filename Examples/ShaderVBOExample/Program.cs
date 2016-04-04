@@ -1,6 +1,7 @@
 ﻿using Framework;
 using OpenTK;
 using OpenTK.Graphics.OpenGL;
+using OpenTK.Input;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -13,13 +14,14 @@ namespace Example
 		struct VertexFormat
 		{
 			Vector3 position;
+			Vector3 velocity;
 
-			public VertexFormat(Vector3 pos)
+			public VertexFormat(Vector3 position, Vector3 velocity)
 			{
-				position = pos;
+				this.position = position;
+				this.velocity = velocity;
 			}
 
-			//public static readonly uint size = sizeof(float) * 3;
 			public static readonly int size = Marshal.SizeOf(typeof(VertexFormat));
 		};
 
@@ -41,6 +43,7 @@ namespace Example
 
 		private MyApplication()
 		{
+			gameWindow.KeyDown += (s, arg) => { if (arg.Key == Key.Escape) gameWindow.Close(); };
 			gameWindow.RenderFrame += game_RenderFrame;
 			LoadShader();
 			InitVBOs();
@@ -49,11 +52,15 @@ namespace Example
 		private void InitVBOs()
 		{
 			var rnd = new Random(12);
-			Func<float> RndNmbr = () => (float)(rnd.NextDouble() * 2.0 - 1.0);
+			Func<float> RndCoord = () => (float)((rnd.NextDouble() - 0.5) * 2.0);
+			Func<float> RndSpeed = () => (float)((rnd.NextDouble() - 0.5) * 20.0);
 			var vertices = new List<VertexFormat>();
 			for (uint i = 0; i < particelCount; ++i)
 			{
-				vertices.Add(new VertexFormat(new Vector3(RndNmbr(), RndNmbr(), RndNmbr())));
+				vertices.Add(new VertexFormat(
+					new Vector3(RndCoord(), RndCoord(), RndCoord()),
+					new Vector3(RndSpeed(), RndSpeed(), RndSpeed())
+					));
 			}
 			uint vbo; //our vbo handler
 			GL.GenBuffers(1, out vbo);
@@ -66,6 +73,7 @@ namespace Example
 			string sVertexShader = @"
 				#version 430 core				
 				layout(location = 0) in vec3 in_position;  //set the frist input on location (index) 0 ; in_position is our attribute 
+				//layout(location = 1) in vec4 in_speed;
 				void main() {
 					gl_Position = vec4(in_position, 1.0);//w is 1.0, also notice cast to a vec4
 				}";
@@ -96,8 +104,11 @@ namespace Example
 			shader.Begin();
 			GL.EnableVertexAttribArray(0);
 			GL.VertexAttribPointer(0, 3, VertexAttribPointerType.Float, false, VertexFormat.size, 0);
+			GL.EnableVertexAttribArray(1);
+			GL.VertexAttribPointer(1, 3, VertexAttribPointerType.Float, false, VertexFormat.size, 9);
 			GL.DrawArrays(PrimitiveType.Points, 0, particelCount);
 			shader.End();
+			GL.DisableVertexAttribArray(1);
 			GL.DisableVertexAttribArray(0);
 			gameWindow.SwapBuffers();
 		}
