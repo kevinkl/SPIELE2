@@ -56,33 +56,7 @@ namespace Example
 
 		private void LoadShader()
 		{
-			string sVertexShader = @"
-				#version 430 core				
-				uniform float time;
-				layout(location = 0) in vec2 in_position;  //set the first input on location (index) 0 ; in_position is our attribute 
-				layout(location = 1) in vec2 in_speed;
-				layout(location = 0) out vec4 position;  //set the first input on location (index) 0 ; in_position is our attribute 
-				void main() {
-					position = vec4(in_position + time * in_speed, 0.0, 1.0);//w is 1.0, also notice cast to a vec4
-				}";
-			string sFragmentShd = @"
-			#version 430 core
-			out vec4 color;
-			void main() {
-				color = vec4(0.0, 0.0, 1.0, 1.0);
-			}";
-			//read shader from file
-			//string fileName = @"..\..\..\GLSL pixel shader\Hello world.glsl";
-			//try
-			//{
-			//	using (StreamReader sr = new StreamReader(fileName))
-			//	{
-			//		sFragmentShd = sr.ReadToEnd();
-			//		sr.Dispose();
-			//	}
-			//}
-			//catch { };
-			shader = ShaderLoader.FromStrings(sVertexShader, sFragmentShd);
+			shader = ShaderLoader.FromFiles(@"..\..\vertex.glsl", @"..\..\fragment.glsl");
 		}
 	}
 }

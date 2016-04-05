@@ -24,10 +24,19 @@ namespace Example
 
 		private MyApplication()
 		{
-			gameWindow.KeyDown += (s, arg) => { if (arg.Key == Key.Escape) gameWindow.Close(); };
+			gameWindow.WindowState = WindowState.Fullscreen;
+			gameWindow.KeyDown += GameWindow_KeyDown;
 			gameWindow.Resize += (s, arg) => GL.Viewport(0, 0, gameWindow.Width, gameWindow.Height);
-			gameWindow.RenderFrame += (s, arg) => visual.Render();
+			gameWindow.RenderFrame += (s, arg) => visual.Render();			
 			gameWindow.RenderFrame += (s, arg) => gameWindow.SwapBuffers();
+		}
+
+		private void GameWindow_KeyDown(object sender, KeyboardKeyEventArgs e)
+		{
+			switch (e.Key)
+			{
+				case Key.Escape: gameWindow.Close(); break;
+			}
 		}
 	}
 }
