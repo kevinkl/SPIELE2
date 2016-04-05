@@ -48,9 +48,9 @@ namespace Example
 					new Vector2(RndSpeed(), RndSpeed())
 					));
 			}
-			uint vbo; //our vbo handler
-			GL.GenBuffers(1, out vbo);
-			GL.BindBuffer(BufferTarget.ArrayBuffer, vbo);//bind to context
+			uint bufferID; //our vbo handler
+			GL.GenBuffers(1, out bufferID);
+			GL.BindBuffer(BufferTarget.ArrayBuffer, bufferID);//bind to context
 			GL.BufferData(BufferTarget.ArrayBuffer, (IntPtr)(VertexFormat.size * vertices.Count), vertices.ToArray(), BufferUsageHint.StaticDraw);
 		}
 
@@ -58,11 +58,12 @@ namespace Example
 		{
 			string sVertexShader = @"
 				#version 430 core				
+				uniform float time;
 				layout(location = 0) in vec2 in_position;  //set the first input on location (index) 0 ; in_position is our attribute 
 				layout(location = 1) in vec2 in_speed;
-				uniform float time;
+				layout(location = 0) out vec4 position;  //set the first input on location (index) 0 ; in_position is our attribute 
 				void main() {
-					gl_Position = vec4(in_position + time * in_speed, 0.0, 1.0);//w is 1.0, also notice cast to a vec4
+					position = vec4(in_position + time * in_speed, 0.0, 1.0);//w is 1.0, also notice cast to a vec4
 				}";
 			string sFragmentShd = @"
 			#version 430 core
