@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ShaderVBOExample", "Example
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MinimalShaderOpenGL", "Examples\MinimalShaderExample\MinimalShaderOpenGL.csproj", "{D2E19210-80D1-4F07-8E9D-5205F18B0B26}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CameraExample", "Examples\CameraExample\CameraExample.csproj", "{D1EBA24E-C135-4AF4-9802-D6EEBEEC2656}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{D2E19210-80D1-4F07-8E9D-5205F18B0B26}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D2E19210-80D1-4F07-8E9D-5205F18B0B26}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D2E19210-80D1-4F07-8E9D-5205F18B0B26}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D1EBA24E-C135-4AF4-9802-D6EEBEEC2656}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D1EBA24E-C135-4AF4-9802-D6EEBEEC2656}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D1EBA24E-C135-4AF4-9802-D6EEBEEC2656}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D1EBA24E-C135-4AF4-9802-D6EEBEEC2656}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
