@@ -12,17 +12,18 @@ namespace Example
 		{
 			LoadShader();
 			InitVBOs();
+			GL.Enable(EnableCap.DepthTest);
 			timeSource.IsLooping = true;
 			timeSource.IsRunning = true;
 		}
 
 		public void Render()
 		{
-			GL.Clear(ClearBufferMask.ColorBufferBit);
-			GL.PointSize(1.0f);
+			GL.Clear(ClearBufferMask.ColorBufferBit | ClearBufferMask.DepthBufferBit);
+			GL.PointSize(5.0f);
 			shader.Begin();
 			GL.Uniform1(shader.GetUniformLocation("time"), timeSource.Position);
-			GL.UniformMatrix4(shader.GetUniformLocation("MVP"), false, ref mvp);
+			GL.UniformMatrix4(shader.GetUniformLocation("mvp"), false, ref mvp);
 			VertexFormat.Activate();
 			GL.DrawArrays(PrimitiveType.Points, 0, particelCount);
 			VertexFormat.Deactive();
@@ -31,7 +32,7 @@ namespace Example
 			GL.DisableVertexAttribArray(0);
 		}
 
-		private const int particelCount = 100000;
+		private const int particelCount = 1000;
 		private Shader shader;
 		private TimeSource timeSource = new TimeSource(50.0f);
 		private Matrix4 mvp = Matrix4.Identity;
