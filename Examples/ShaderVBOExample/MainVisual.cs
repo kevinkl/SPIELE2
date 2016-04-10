@@ -22,20 +22,21 @@ namespace Example
 			GL.PointSize(1.0f);
 			shader.Begin();
 			GL.Uniform1(shader.GetUniformLocation("time"), timeSource.Position);
-			VertexFormat.Activate();
+			GL.BindVertexArray(VAO);
 			GL.DrawArrays(PrimitiveType.Points, 0, particelCount);
-			VertexFormat.Deactive();
+			GL.BindVertexArray(0);
 			shader.End();
-			GL.DisableVertexAttribArray(1);
-			GL.DisableVertexAttribArray(0);
 		}
 
 		private const int particelCount = 100000;
 		private Shader shader;
 		private TimeSource timeSource = new TimeSource(50.0f);
+		private int VAO;
 
 		private void InitVBOs()
 		{
+			VAO = GL.GenVertexArray();
+			GL.BindVertexArray(VAO);
 			var rnd = new Random(12);
 			Func<float> Rnd01 = () => (float)rnd.NextDouble();
 			Func<float> RndCoord = () => (Rnd01() - 0.5f) * 2.0f;
@@ -52,6 +53,11 @@ namespace Example
 			GL.GenBuffers(1, out bufferID);
 			GL.BindBuffer(BufferTarget.ArrayBuffer, bufferID);//bind to context
 			GL.BufferData(BufferTarget.ArrayBuffer, (IntPtr)(VertexFormat.size * vertices.Count), vertices.ToArray(), BufferUsageHint.StaticDraw);
+			VertexFormat.Activate();
+			//everything stored in VAO -> unbind everything
+			GL.BindVertexArray(0);
+			GL.BindBuffer(BufferTarget.ArrayBuffer, 0);
+			VertexFormat.Deactive();
 		}
 
 		private void LoadShader()

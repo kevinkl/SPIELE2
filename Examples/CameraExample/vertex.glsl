@@ -3,14 +3,17 @@
 uniform float time;
 uniform mat4 mvp;
 
-layout(location = 0) in vec3 in_position;
-layout(location = 1) in vec3 in_speed;
+in vec3 position;
+in vec3 instancePosition;
+in vec3 instanceSpeed;
 
 out float depthCue;
 
 void main() 
 {
-	vec3 pos = in_position + time * in_speed;
-	depthCue = 1.0 - clamp(pos.z, 0.0, 1.0);
-	gl_Position = vec4(pos, 1.0);
+	vec3 pos = position;
+	pos += instancePosition + time * instanceSpeed;
+	vec4 posCS = mvp * vec4(pos, 1.0);
+	depthCue = 1.0 - clamp(posCS.z, 0.0, 1.0);
+	gl_Position = posCS;
 }

@@ -96,7 +96,6 @@
   <ItemGroup>
     <Compile Include="MainVisual.cs" />
     <Compile Include="Program.cs" />
-    <Compile Include="VertexFormat.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="OpenTK, Version=1.1.0.0, Culture=neutral, PublicKeyToken=bad199fe84eb3df4, processorArchitecture=MSIL">
