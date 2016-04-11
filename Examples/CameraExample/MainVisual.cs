@@ -12,39 +12,43 @@ namespace Example
 		{
 			LoadShader();
 			var locPos = shader.GetAttributeLocation("position");
+			var locNormal = shader.GetAttributeLocation("normal");
 			var locInstPos = shader.GetAttributeLocation("instancePosition");
 			var locInstSpeed = shader.GetAttributeLocation("instanceSpeed");
-			geometryInstance = InitVA(locPos, locInstPos, locInstSpeed);
+			geometry = InitVA(locPos, locNormal, locInstPos, locInstSpeed);
 			GL.Enable(EnableCap.DepthTest);
-			//GL.PolygonMode(MaterialFace.FrontAndBack, PolygonMode.Line);
+			GL.PolygonMode(MaterialFace.FrontAndBack, PolygonMode.Line);
 			timeSource.IsLooping = true;
 			timeSource.IsRunning = true;
 		}
 
 		public void Render()
 		{
-			//mvp = Matrix4.CreatePerspectiveFieldOfView(1.2f, 1.0f, 0.1f, 10.0f);
-			//mvp = Matrix4.CreateRotationX(timeSource.Position * 0.7f) * Matrix4.CreateRotationY(timeSource.Position) * Matrix4.CreateRotationZ(timeSource.Position * 0.3f);
+			mvp = Matrix4.CreatePerspectiveFieldOfView(1.2f, 1.0f, 0.1f, 10.0f);
+			var rotY = Matrix4.CreateRotationY(timeSource.Position * 0.5f);
 			GL.Clear(ClearBufferMask.ColorBufferBit | ClearBufferMask.DepthBufferBit);
 			shader.Begin();
 			GL.Uniform1(shader.GetUniformLocation("time"), timeSource.Position);
+			GL.Uniform3(shader.GetUniformLocation("light"), Vector3.Transform(light, rotY));
 			GL.UniformMatrix4(shader.GetUniformLocation("mvp"), false, ref mvp);
-			geometryInstance.Draw(particelCount);
+			geometry.Draw(particelCount);
 			shader.End();
 		}
 
-		private const int particelCount = 1000;
+		private const int particelCount = 10000;
+		private Vector3 light = new Vector3(0.0f, 0.0f, -1.0f);
 		private Shader shader;
 		private TimeSource timeSource = new TimeSource(50.0f);
 		private Matrix4 mvp = Matrix4.Identity;
-		private VAO geometryInstance;
+		private VAO geometry;
 
-		private static VAO InitVA(int locPos, int locInstPos, int locInstSpeed)
+		private static VAO InitVA(int locPos, int locNormal, int locInstPos, int locInstSpeed)
 		{
 			Mesh mesh = BasicMeshes.CreateSphere(0.03f, 2);
 			var vao = new VAO();
 			
 			vao.SetAttribute(locPos, mesh.positions.ToArray(), VertexAttribPointerType.Float, 3);
+			vao.SetAttribute(locNormal, mesh.normals.ToArray(), VertexAttribPointerType.Float, 3);
 			vao.SetID(mesh.ids.ToArray(), PrimitiveType.Triangles);
 
 			//per instance attributes

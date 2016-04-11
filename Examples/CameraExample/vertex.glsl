@@ -4,13 +4,16 @@ uniform float time;
 uniform mat4 mvp;
 
 in vec3 position;
+in vec3 normal;
 in vec3 instancePosition;
 in vec3 instanceSpeed;
 
 out float depthCue;
+out vec3 n;
 
 void main() 
 {
+	n = normal;
 	vec3 pos = position;
 	pos += instancePosition + time * instanceSpeed;
 	vec4 posCS = mvp * vec4(pos, 1.0);
