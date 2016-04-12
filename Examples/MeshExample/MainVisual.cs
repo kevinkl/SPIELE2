@@ -34,7 +34,7 @@ namespace Example
 
 		private static VAO InitVA(int locPos, int locNormal)
 		{
-			Mesh mesh = BasicMeshes.CreateSphere(0.5f, 3);
+			Mesh mesh = BasicMeshes.CreateSphere(0.9f, 3);
 			var vao = new VAO();
 			vao.SetAttribute(locPos, mesh.positions.ToArray(), VertexAttribPointerType.Float, 3);
 			vao.SetAttribute(locNormal, mesh.normals.ToArray(), VertexAttribPointerType.Float, 3);

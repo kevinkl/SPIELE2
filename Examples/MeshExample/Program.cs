@@ -26,9 +26,9 @@ namespace Example
 		private MyApplication()
 		{
 			var mode = new GraphicsMode(new ColorFormat(32), 24, 8, 0);
-			gameWindow = new GameWindow(1024, 1024, mode, "Example", GameWindowFlags.Default, DisplayDevice.Default, 4, 3, GraphicsContextFlags.ForwardCompatible);
+			gameWindow = new GameWindow(800, 800, mode, "Example", GameWindowFlags.Default, DisplayDevice.Default, 4, 3, GraphicsContextFlags.ForwardCompatible);
 
-			gameWindow.WindowState = WindowState.Fullscreen;
+			//gameWindow.WindowState = WindowState.Fullscreen;
 			gameWindow.KeyDown += GameWindow_KeyDown;
 			gameWindow.Resize += (s, arg) => GL.Viewport(0, 0, gameWindow.Width, gameWindow.Height);
 			gameWindow.RenderFrame += (s, arg) => visual.Render();			
