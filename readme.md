@@ -6,7 +6,7 @@
 ###Exercises
 1. **MinimalShaderExample**: compile/run/tweak shader
 1. **ShaderVBOExample**: get points to follow mouse cursor
-1. **MeshExample**: implement phong lighting
+1. **MeshExample**: implement phong lighting, instanced drawing
 
 
 ###[Links and further reading](https://github.com/danielscherzer/Framework/blob/master/links.md)

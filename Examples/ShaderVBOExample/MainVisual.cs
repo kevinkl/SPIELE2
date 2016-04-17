@@ -3,6 +3,7 @@ using OpenTK;
 using OpenTK.Graphics.OpenGL;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 
 namespace Example
 {
@@ -12,8 +13,7 @@ namespace Example
 		{
 			LoadShader();
 			InitVBOs();
-			timeSource.IsLooping = true;
-			timeSource.IsRunning = true;
+			timeSource.Start();
 		}
 
 		public void Render()
@@ -21,7 +21,7 @@ namespace Example
 			GL.Clear(ClearBufferMask.ColorBufferBit);
 			GL.PointSize(1.0f);
 			shader.Begin();
-			GL.Uniform1(shader.GetUniformLocation("time"), timeSource.Position);
+			GL.Uniform1(shader.GetUniformLocation("time"), timeSource.Elapsed.TotalSeconds);
 			GL.BindVertexArray(VAO);
 			GL.DrawArrays(PrimitiveType.Points, 0, particelCount);
 			GL.BindVertexArray(0);
@@ -30,7 +30,7 @@ namespace Example
 
 		private const int particelCount = 100000;
 		private Shader shader;
-		private TimeSource timeSource = new TimeSource(50.0f);
+		private Stopwatch timeSource = new Stopwatch();
 		private int VAO;
 
 		private void InitVBOs()
