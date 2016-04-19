@@ -7,7 +7,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Framework", "Framework\Fram
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ShaderVBOExample", "Examples\ShaderVBOExample\ShaderVBOExample.csproj", "{C9043719-1776-48D3-9515-5370F1508C48}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MinimalShaderOpenGL", "Examples\MinimalShaderExample\MinimalShaderOpenGL.csproj", "{D2E19210-80D1-4F07-8E9D-5205F18B0B26}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MinimalShaderExample", "Examples\MinimalShaderExample\MinimalShaderExample.csproj", "{D2E19210-80D1-4F07-8E9D-5205F18B0B26}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CameraExample", "Examples\CameraExample\CameraExample.csproj", "{D1EBA24E-C135-4AF4-9802-D6EEBEEC2656}"
 EndProject
