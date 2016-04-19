@@ -1,5 +1,8 @@
 #version 430 core
+uniform sampler2D texDiffuse;
+
 in vec3 n;
+
 
 out vec4 color;
 

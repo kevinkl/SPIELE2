@@ -8,15 +8,14 @@ in vec3 normal;
 in vec3 instancePosition;
 in vec3 instanceSpeed;
 
-out float depthCue;
 out vec3 n;
 
 void main() 
 {
 	n = normal;
+
 	vec3 pos = position;
 	pos += instancePosition + time * instanceSpeed;
-	vec4 posCS = mvp * vec4(pos, 1.0);
-	depthCue = 1.0 - clamp(posCS.z, 0.0, 1.0);
-	gl_Position = posCS;
+
+	gl_Position = mvp * vec4(pos, 1.0);
 }

@@ -9,14 +9,11 @@ namespace Example
 	{
 		public MainVisual()
 		{
-			LoadShader();
-			var locPos = shader.GetAttributeLocation("position");
-			var locNormal = shader.GetAttributeLocation("normal");
-			var locInstPos = shader.GetAttributeLocation("instancePosition");
-			var locInstSpeed = shader.GetAttributeLocation("instanceSpeed");
-			geometry = CreateMesh(locPos, locNormal, locInstPos, locInstSpeed);
+			shader = ShaderLoader.FromFiles(@"..\..\vertex.glsl", @"..\..\fragment.glsl");
 
-			CreatePerInstanceAttributes(geometry, locInstPos, locInstSpeed);
+			geometry = CreateMesh(shader);
+
+			CreatePerInstanceAttributes(geometry, shader);
 
 			GL.Enable(EnableCap.DepthTest);
 		}
@@ -33,18 +30,17 @@ namespace Example
 		private Shader shader;
 		private VAO geometry;
 
-		private static VAO CreateMesh(int locPos, int locNormal, int locInstPos, int locInstSpeed)
+		private static VAO CreateMesh(Shader shader)
 		{
 			Mesh mesh = Meshes.CreateSphere(0.03f, 2);
 			var vao = new VAO();
-
-			vao.SetAttribute(locPos, mesh.positions.ToArray(), VertexAttribPointerType.Float, 3);
-			vao.SetAttribute(locNormal, mesh.normals.ToArray(), VertexAttribPointerType.Float, 3);
+			vao.SetAttribute(shader.GetAttributeLocation("position"), mesh.positions.ToArray(), VertexAttribPointerType.Float, 3);
+			vao.SetAttribute(shader.GetAttributeLocation("normal"), mesh.normals.ToArray(), VertexAttribPointerType.Float, 3);
 			vao.SetID(mesh.ids.ToArray(), PrimitiveType.Triangles);
 			return vao;
 		}
 
-		private static void CreatePerInstanceAttributes(VAO vao, int locInstPos, int locInstSpeed)
+		private static void CreatePerInstanceAttributes(VAO vao, Shader shader)
 		{
 			//per instance attributes
 			var rnd = new Random(12);
@@ -55,14 +51,10 @@ namespace Example
 			{
 				instancePositions[i] = new Vector3(RndCoord(), RndCoord(), RndCoord());
 			}
-			vao.SetAttribute(locInstPos, instancePositions, VertexAttribPointerType.Float, 3, true);
+			vao.SetAttribute(shader.GetAttributeLocation("instancePosition"), instancePositions, VertexAttribPointerType.Float, 3, true);
 
 			//todo: add per instance attribute speed
-		}
-
-		private void LoadShader()
-		{
-			shader = ShaderLoader.FromFiles(@"..\..\vertex.glsl", @"..\..\fragment.glsl");
+			//var locInstSpeed = shader.GetAttributeLocation("instanceSpeed");
 		}
 	}
 }
