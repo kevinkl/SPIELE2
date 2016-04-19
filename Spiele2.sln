@@ -18,6 +18,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MeshExample", "Examples\MeshExample\MeshExample.csproj", "{A4ED5B7A-C3CA-4E53-A5C3-61A5D81F5188}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InstancingExample", "Examples\InstancingExample\InstancingExample.csproj", "{4F8B145D-AD8A-43CB-B706-569F0B80C1E9}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Examples", "Examples", "{E6454C74-3D02-49DC-BF69-CCBD7CE40E25}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -44,8 +48,18 @@ Global
 		{A4ED5B7A-C3CA-4E53-A5C3-61A5D81F5188}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A4ED5B7A-C3CA-4E53-A5C3-61A5D81F5188}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A4ED5B7A-C3CA-4E53-A5C3-61A5D81F5188}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4F8B145D-AD8A-43CB-B706-569F0B80C1E9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4F8B145D-AD8A-43CB-B706-569F0B80C1E9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4F8B145D-AD8A-43CB-B706-569F0B80C1E9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4F8B145D-AD8A-43CB-B706-569F0B80C1E9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{C9043719-1776-48D3-9515-5370F1508C48} = {E6454C74-3D02-49DC-BF69-CCBD7CE40E25}
+		{D2E19210-80D1-4F07-8E9D-5205F18B0B26} = {E6454C74-3D02-49DC-BF69-CCBD7CE40E25}
+		{A4ED5B7A-C3CA-4E53-A5C3-61A5D81F5188} = {E6454C74-3D02-49DC-BF69-CCBD7CE40E25}
+		{4F8B145D-AD8A-43CB-B706-569F0B80C1E9} = {E6454C74-3D02-49DC-BF69-CCBD7CE40E25}
 	EndGlobalSection
 EndGlobal

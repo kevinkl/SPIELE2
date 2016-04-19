@@ -6,7 +6,9 @@
 ###Exercises
 1. **MinimalShaderExample**: compile/run/tweak shader
 1. **ShaderVBOExample**: get points to follow mouse cursor
-1. **MeshExample**: implement phong lighting, instanced drawing
+1. **InstancingExample**: add instance attribute speed (an individual speed for each sphere) and move spheres in vertex shader
+1. **MeshExample**: test obj loading; use instancing; implement phong lighting;
+
 
 
 ###[Links and further reading](https://github.com/danielscherzer/Framework/blob/master/links.md)
